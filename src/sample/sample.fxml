@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.media.*?>
+
+<SplitPane dividerPositions="0.29797979797979796" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="529.0" prefWidth="733.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+  <items>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="217.0">
+         <children>
+            <ListView fx:id="listview" editable="true" layoutY="74.0" onMouseClicked="#handleButtonSelect" prefHeight="452.0" prefWidth="215.0" />
+            <Label layoutX="88.0" layoutY="14.0" text="PlayList" />
+            <Button fx:id="btnadd" layoutX="73.0" layoutY="40.0" mnemonicParsing="false" onAction="#handlebuttonAdd" text="Add Song" />
+         </children></AnchorPane>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+         <children>
+            <Button fx:id="btnPlay" layoutX="229.0" layoutY="374.0" mnemonicParsing="false" onAction="#handleButtonPlay" text="Play" />
+            <Button fx:id="btnNext" layoutX="290.0" layoutY="374.0" mnemonicParsing="false" onAction="#handleButtonNext" text="Forward" />
+            <Button fx:id="btnPrev" layoutX="161.0" layoutY="374.0" mnemonicParsing="false" onAction="#handleButtonPrev" text="Back" />
+            <Label fx:id="songTitle" layoutX="222.0" layoutY="328.0" text="Song Title" />
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="148.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true" />
+            <Slider fx:id="volumeSlider" layoutX="178.0" layoutY="425.0" onDragDetected="#handleSliderVolume" value="50.0" />
+            <Slider fx:id="progressBar" layoutX="109.0" layoutY="291.0" onMouseDragged="#handleProgressDragged" onMousePressed="#handleProgressPressed" prefHeight="14.0" prefWidth="278.0" />
+            <MediaView fx:id="mediaView" fitHeight="250.0" fitWidth="400.0" layoutX="55.0" layoutY="19.0">
+               <viewport>
+                  <Rectangle2D />
+               </viewport></MediaView>
+         </children></AnchorPane>
+  </items>
+</SplitPane>
