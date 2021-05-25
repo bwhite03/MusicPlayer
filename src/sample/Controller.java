@@ -39,14 +39,15 @@ public class Controller {
     public String songName;
     public Slider volumeSlider;
     public Slider progressBar;
-
-
+    public double volume;
+    public String workingDirectory = System.getProperty("user.dir");
+    public String requiredDirectory = workingDirectory + "\\" + "src\\sample\\songs\\";
 
     @FXML
     public void initialize() {
         listview.getItems().clear();
 
-        File file = new File("D:\\projects\\JavaProjects\\MusicPlayer\\src\\sample\\songs\\");
+        File file = new File(requiredDirectory);
         File[] files = file.listFiles();
 
         for(File f: files){
@@ -64,7 +65,6 @@ public class Controller {
                 };
             }
         });
-
     }
 
     @FXML
@@ -79,7 +79,7 @@ public class Controller {
 
         try {
             Path source = Paths.get(String.valueOf(file));
-            Path dest = Paths.get("D:\\projects\\JavaProjects\\MusicPlayer\\src\\sample\\songs\\" + songName);
+            Path dest = Paths.get(requiredDirectory + songName);
             Files.move(source, dest);
         } catch (IOException e){
             System.out.println(e);
@@ -103,6 +103,7 @@ public class Controller {
         } else {
             player.play();
             videoPlayer.play();
+            videoPlayer.setCycleCount(MediaPlayer.INDEFINITE);
             btnPlay.setText("Pause");
         }
 
@@ -134,7 +135,8 @@ public class Controller {
         volumeSlider.valueProperty().addListener(new InvalidationListener() {
             @Override
             public void invalidated(Observable observable) {
-                player.setVolume(volumeSlider.getValue() / 100);
+                volume = volumeSlider.getValue() / 100;
+                player.setVolume(volume);
             }
         });
     }
@@ -159,6 +161,8 @@ public class Controller {
         Media mediaV = new Media(selectedVideo.toURI().toString());
         videoPlayer = new MediaPlayer(mediaV);
         mediaView.setMediaPlayer(videoPlayer);
+
+        player.setVolume(volume);
 
         btnPlay.setText("Play");
         player.stop();
